@@ -18,10 +18,6 @@
     </encoder>
   </appender>
 
-  <logger name="com.demo.profileproject" level="debug" additivity="false">
-    <appender-ref ref="FILE"/>
-  </logger>
-
   <root level="info">
     <appender-ref ref="FILE" />
     <appender-ref ref="STDOUT" />
