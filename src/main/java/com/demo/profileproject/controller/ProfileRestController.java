@@ -1,15 +1,10 @@
 package com.demo.profileproject.controller;
 
-import com.demo.profileproject.model.db.entities.Profile;
-import com.demo.profileproject.model.db.repositories.ProfileRepository;
 import com.demo.profileproject.model.dto.ProfileDto;
 import com.demo.profileproject.model.services.ProfileService;
-import com.google.common.collect.Streams;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -33,14 +28,12 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ProfileRestController {
 
-  @Autowired
-  ProfileService profileService;
+  @Autowired ProfileService profileService;
 
   @GetMapping
   @ResponseBody
   @ResponseStatus(HttpStatus.OK)
-  public List<ProfileDto> getProfiles()
-  {
+  public List<ProfileDto> getProfiles() {
     return profileService.getProfiles();
   }
 
@@ -61,7 +54,8 @@ public class ProfileRestController {
   @PutMapping("/{id}")
   @ResponseBody
   @ResponseStatus(HttpStatus.OK)
-  public ProfileDto updateProfile(@PathVariable Long id, @RequestBody @Valid ProfileDto profileDto) {
+  public ProfileDto updateProfile(
+      @PathVariable Long id, @RequestBody @Valid ProfileDto profileDto) {
     return profileService.updateProfile(id, profileDto);
   }
 
@@ -72,19 +66,13 @@ public class ProfileRestController {
   }
 
   @RequestMapping(method = RequestMethod.OPTIONS)
-  ResponseEntity<?> collectionOptions()
-  {
-    return ResponseEntity
-        .ok()
-        .allow(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS)
-        .build();
+  ResponseEntity<?> collectionOptions() {
+    return ResponseEntity.ok().allow(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS).build();
   }
 
-  @RequestMapping(value="/{id}", method = RequestMethod.OPTIONS)
-  ResponseEntity<?> collectionOptionsId()
-  {
-    return ResponseEntity
-        .ok()
+  @RequestMapping(value = "/{id}", method = RequestMethod.OPTIONS)
+  ResponseEntity<?> collectionOptionsId() {
+    return ResponseEntity.ok()
         .allow(HttpMethod.GET, HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.OPTIONS)
         .build();
   }
