@@ -5,12 +5,11 @@ import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
+import history from '../../history';
 import { ProfileHeader } from '../header/header'
 import { ProfileFooter } from '../footer/footer'
+import '../rootstyle.scss'
 
-function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
-    return <ListItem button component="a" {...props} />;
-}
 
 export class ProfileList extends Component {
 
@@ -30,7 +29,7 @@ export class ProfileList extends Component {
             'Authorization': `Bearer ${this.idToken}`
           }
         });
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ profilesList: res.data });
     };
 
@@ -38,24 +37,30 @@ export class ProfileList extends Component {
         return <Link to={`/profileentry/${itemId}`}/>
     }
 
+    handleItemClick(item) {
+        const path = `/profileentry/${item.id}`
+        console.log(path)
+        this.props.history.push({
+            pathname: path,
+            profileData: {item}
+        });
+    }
+
     render() {
         let counter = 0;
         let profileKey;
         return (
-            <div>
+            <div className='globalView'>
                 <ProfileHeader/>
                     <List>
                     {
                         this.state.profilesList.map((item) => {
                             profileKey = `profile-${++counter}`
-                            this.getCustomLink(item.id)
                             return (
                                 <div key={`profile-div-${counter}`}>
-                                    <Link to={`/profileentry/${item.id}`}>
-                                        <ListItem key={profileKey} button>
+                                        <ListItem key={profileKey} button onClick={() => this.handleItemClick(item)}>
                                             <ListItemText key={`profile-text-${counter}`} primary={item.name} />
                                         </ListItem>
-                                    </Link>
                                 </div>
                             );
                         })

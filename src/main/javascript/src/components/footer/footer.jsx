@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './footer.scss';
 
 export class ProfileFooter extends Component {
     constructor(props) {
@@ -7,7 +8,7 @@ export class ProfileFooter extends Component {
 
     render() {
         return (
-            <div>Footer</div>
+            <div className='footerBackground'></div>
         )
     }
 }

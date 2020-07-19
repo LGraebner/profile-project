@@ -1,0 +1,16 @@
+$fontColor: black;
+
+.paperStyle {
+    color:$fontColor;
+    height:300px;
+    margin-bottom: 25px;
+    margin-left:100px;
+    margin-right:100px;
+    padding:15px;
+}
+
+h2 {
+    color: $fontColor;
+    text-align:left;
+    font-size: 18pt;
+}
