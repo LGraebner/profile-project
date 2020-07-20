@@ -16,4 +16,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
       registry.addViewController("/{spring:\\w+}/**{spring:?!(\\.js|\\.css)$}")
             .setViewName("forward:/");
   }
+
+  //TODO add security with admin login that can create/update/delete profiles and public users
+  //who can just scroll through the list and view profiles
 }
