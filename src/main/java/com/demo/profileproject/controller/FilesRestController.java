@@ -33,16 +33,16 @@ public class FilesRestController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @PostMapping("/{id}")
   @ResponseBody
-  public void uploadTtgSoftware(
-      @PathVariable Integer id,
+  public void uploadImage(
+      @PathVariable Long id,
       @RequestParam("image-file") MultipartFile imageFile) {
     fileService.uploadImageToFileStore(imageFile, id);
   }
 
   @ResponseStatus(HttpStatus.OK)
   @GetMapping("/{id}")
-  public ResponseEntity getFile(
-      @PathVariable Integer id) {
+  public ResponseEntity getImage(
+      @PathVariable String id) {
 
     Resource resource = fileService.getImageFromFilestore(id);
 

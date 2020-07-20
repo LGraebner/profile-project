@@ -62,4 +62,11 @@ public class ProfileService {
     log.info("Deleting profile with id={}", id);
     profileRepository.deleteById(id);
   }
+
+  public void updateImageName(Long id, String imageName) {
+    log.info("Updating imageName for profileId {} to {}", id, imageName);
+    Profile profile = profileRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile does not exist: " + id));
+    profile.setImageName(imageName);
+    profileRepository.save(profile);
+  }
 }

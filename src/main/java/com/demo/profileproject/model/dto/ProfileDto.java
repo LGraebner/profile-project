@@ -16,6 +16,9 @@ public class ProfileDto {
   @NotEmpty
   private String description;
 
+  @Null
+  private String imageName;
+
   private String link;
 
 }
