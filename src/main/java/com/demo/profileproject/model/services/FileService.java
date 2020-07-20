@@ -60,7 +60,7 @@ public class FileService {
 
   private File getFilestoreDir() {
     ClassLoader classLoader = this.getClass().getClassLoader();
-    File baseDir = new File(new File(classLoader.getResource("").getFile()), FILESTORE_PATH);
+    File baseDir = new File(new File("").getAbsolutePath(), FILESTORE_PATH);
     if (!baseDir.exists()) {
       baseDir.mkdirs();
     }

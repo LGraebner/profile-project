@@ -1,4 +1,4 @@
-package com.demo.profileproject.mapper;
+package com.demo.profileproject.utils;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

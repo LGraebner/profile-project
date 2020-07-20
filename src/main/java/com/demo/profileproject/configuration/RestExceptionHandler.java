@@ -1,4 +1,4 @@
-package com.demo.profileproject.controller;
+package com.demo.profileproject.configuration;
 
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
