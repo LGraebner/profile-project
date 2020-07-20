@@ -9,7 +9,12 @@ $fontColor: black;
 }
 
 .profile-view-app-bar {
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(226,37,37,1) 0%, rgba(211,49,49,1) 82.8% );
+}
 
+.profile-view-app-bar-button {
+    font-size: 14;
+    font-weight: bold;
 }
 
 .profile-view-grid {

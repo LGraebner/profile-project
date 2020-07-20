@@ -64,10 +64,10 @@ export class ProfileList extends Component {
                 <ProfileHeader/>
                 <div style={{paddingLeft:'100px', paddingRight:'100px'}}>
                 <div>
-                    <AppBar position="static" className='profile-view-app-bar'>
+                    <AppBar position="static" className='profile-list-app-bar'>
                     <Toolbar >
                         <div style={{marginLeft: 'auto'}}>
-                            <Button color="inherit" onClick={() => this.handleCreateNew()}>
+                            <Button color="inherit" size="large" onClick={() => this.handleCreateNew()}>
                                 Add
                             </Button>
                         </div>

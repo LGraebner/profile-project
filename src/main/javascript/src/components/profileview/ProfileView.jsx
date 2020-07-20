@@ -51,6 +51,7 @@ export class ProfileView extends Component {
                         editMode: false,
                         isUploadSuccesful: false,
                         deleteDialogOpen : false,
+                        invalidDataDialogOpen : false,
                         isNewProfile : isNewProfile
                     }  
         //  console.log('profileId', this.state.profileId)
@@ -90,11 +91,18 @@ export class ProfileView extends Component {
     }
 
     saveProfile = async () => {
+
         let profileData = {
             name : this.state.profileData.name,
             description :  this.state.profileData.description,
             link : this.state.profileData.link
         }
+
+        if (!profileData.name || !profileData.description || !profileData.link || profileData.name.length > 16) {
+            this.setState({invalidDataDialogOpen : true});
+            return;
+        }
+
         console.log('saving profileData', profileData);
         if  (!this.state.isNewProfile) {
             await axios.put(`${apiEndpoint}/profiles/${this.state.profileId}`, profileData, {
@@ -151,6 +159,10 @@ export class ProfileView extends Component {
         });
     };
 
+    handleInvalidData = () => {
+        this.setState({invalidDataDialogOpen : false});
+    };
+
 
     onFileChange = event => { 
      
@@ -200,47 +212,6 @@ export class ProfileView extends Component {
         const isDataAvailable = this.state.profileData != null
         return (
             <div className='globalView'>
-
-
-                <ProfileHeader/>
-                    <div style={{paddingLeft:'100px', paddingRight:'100px'}}>
-                    <div>
-                    <AppBar 
-                        position="static" 
-                        className='profile-view-app-bar' 
-                
-                    >
-                    
-                    {
-                        this.state.editMode && !this.state.isNewProfile ?
-                        <Toolbar>
-                            <div style={{marginLeft: 'auto'}}>
-                                <Button color="inherit"  onClick={() => this.saveProfile()}>
-                                    Save
-                                </Button>
-                                <Button color="inherit"  onClick={() => this.cancelEdit()}>
-                                    Cancel
-                                </Button>
-                            </div>
-                        </Toolbar>
-                        :
-                        this.state.isNewProfile ?
-                        <Toolbar>
-                            <div style={{marginLeft: 'auto'}}>
-                                <Button color="inherit"  onClick={() => this.saveProfile()}>
-                                    Save
-                                </Button>
-                            </div>
-                        </Toolbar>
-                        :
-                        <Toolbar >
-                            <div style={{marginLeft: 'auto'}}>
-                                <Button color="inherit"  onClick={() => this.toggleEdit()}>
-                                    Edit
-                                </Button>
-                                <Button color="inherit"  onClick={() => this.handleDeleteOpen()}>
-                                    Delete
-                                </Button>
                                 <Dialog
                                     open={this.state.deleteDialogOpen}
                                     onClose={this.handleDeleteClose}
@@ -262,6 +233,70 @@ export class ProfileView extends Component {
                                             </Button>
                                         </DialogActions>
                                 </Dialog>
+
+                                <Dialog
+                                    open={this.state.invalidDataDialogOpen}
+                                    onClose={this.handleInvalidData}
+                                    aria-labelledby="alert-dialog-title"
+                                    aria-describedby="alert-dialog-description"
+                                >
+                                    <DialogTitle id="alert-dialog-title">{"Invalid Data"}</DialogTitle>
+                                        <DialogContent>
+                                            <DialogContentText id="alert-dialog-description">
+                                                One of the text fields contains invalid data
+                                            </DialogContentText>
+                                        </DialogContent>
+                                        <DialogActions>
+                                            <Button onClick={this.handleInvalidData} color="primary">
+                                                Ok
+                                            </Button>
+                                        </DialogActions>
+                                </Dialog>
+
+                <ProfileHeader/>
+                    <div style={{paddingLeft:'100px', paddingRight:'100px'}}>
+                    <div>
+                    <AppBar 
+                        position="static" 
+                        className='profile-view-app-bar' 
+                
+                    >
+                    
+                    {
+                        this.state.editMode && !this.state.isNewProfile ?
+                        <Toolbar>
+                            <div style={{marginLeft: 'auto'}}>
+                                <Button color="inherit" size="large" onClick={() => this.saveProfile()}>
+                                    Save
+                                </Button>
+                                <Button 
+                                    color="inherit"
+                                    onClick={() => this.cancelEdit()}
+                                    size="large"
+                                >
+                                    Cancel
+                                </Button>
+                            </div>
+                        </Toolbar>
+                        :
+                        this.state.isNewProfile ?
+                        <Toolbar>
+                            <div style={{marginLeft: 'auto'}}>
+                                <Button color="inherit"  onClick={() => this.saveProfile()}>
+                                    Save
+                                </Button>
+                            </div>
+                        </Toolbar>
+                        :
+                        <Toolbar >
+                            <div style={{marginLeft: 'auto'}}>
+                                <Button color="inherit" size="large" onClick={() => this.toggleEdit()}>
+                                    Edit
+                                </Button>
+                                <Button color="inherit" size="large" onClick={() => this.handleDeleteOpen()}>
+                                    Delete
+                                </Button>
+
                             </div>
                         </Toolbar>
                     }
@@ -325,6 +360,7 @@ export class ProfileView extends Component {
                                     value={this.state.profileData.name} 
                                     id="profile-name" 
                                     label="Name" 
+                                    autoComplete='off'
 
 
                                     variant="outlined"
@@ -343,7 +379,7 @@ export class ProfileView extends Component {
                                     value={this.state.profileData.link} 
                                     id="profile-link" 
                                     label="Link" 
-   
+                                    autoComplete='off'
 
                                     variant="outlined"
                                     style={{width:'100%', marginBottom:'25px'}}
@@ -361,7 +397,7 @@ export class ProfileView extends Component {
                                                 value={this.state.profileData.description} 
                                                 id="profile-description" 
                                                 label="Description" 
-
+                                                autoComplete='off'
 
                                                 variant="outlined"
                                                 style={{width:'100%'}}

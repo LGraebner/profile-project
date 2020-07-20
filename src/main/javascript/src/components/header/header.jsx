@@ -19,8 +19,9 @@ export class ProfileHeader extends Component {
                             aria-label="home"
                             component={Link} 
                             to='/'
+                            style={{ top: '18%'}}
                             >
-                            <HomeIcon style={{ color: 'white' }} />
+                            <HomeIcon style={{ color: 'white', fontSize: 40 }} />
                         </IconButton>
                     </div>
                     <div className='headerTitle'>
