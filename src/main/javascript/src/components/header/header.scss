@@ -6,7 +6,6 @@ $headerFont: white;
 
 h1 {
     color: $headerFont;
-
     font-size: 24pt;
 }
 
@@ -16,7 +15,8 @@ h1 {
 }
 
 .headerBackground {
-    background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,66,121,1) 0%, rgba(0,212,255,1) 100%);
+    background-color: #485461;
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
     height: 96px;
     margin-bottom: 25px;
 }

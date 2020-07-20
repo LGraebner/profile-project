@@ -1,12 +1,24 @@
 $fontColor: black;
 
-.paperStyle {
+.profile-view-paper {
     color:$fontColor;
-    height:300px;
+    min-height:500px;
     margin-bottom: 25px;
-    margin-left:100px;
-    margin-right:100px;
+    overflow: auto;
     padding:15px;
+}
+
+.profile-view-app-bar {
+
+}
+
+.profile-view-grid {
+    padding: 0px;
+}
+
+.profile-view-input-container {
+    display: flex;
+    align-items: center;
 }
 
 h2 {
