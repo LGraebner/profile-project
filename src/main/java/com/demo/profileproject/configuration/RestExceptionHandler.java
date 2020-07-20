@@ -3,6 +3,7 @@ package com.demo.profileproject.configuration;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class RestExceptionHandler {
   @ExceptionHandler
   public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-    if (e instanceof ResponseStatusException) {
+    if (e instanceof ResponseStatusException ||  e instanceof MethodArgumentNotValidException) {
       log.error(e.getMessage());
     } else {
       log.error(e.getMessage(), e);
